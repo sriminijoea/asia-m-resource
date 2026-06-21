@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库索引 · leisu 资料整理</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #fbe9d7 0%, #f4d9c0 40%, #edd0b0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1.5rem 4rem;
+            line-height: 1.6;
+            color: #3a2e24;
+        }
+
+        .container {
+            max-width: 980px;
+            width: 100%;
+            background: rgba(255, 250, 242, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            padding: 2.5rem 2.2rem 3.5rem;
+            box-shadow: 0 12px 30px rgba(140, 90, 60, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #4e3825;
+            border-left: 6px solid #c29a7a;
+            padding-left: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #7a624b;
+            margin-bottom: 2.2rem;
+            padding-left: 1.8rem;
+            font-weight: 350;
+            border-bottom: 1px dashed #dbbc9f;
+            padding-bottom: 0.8rem;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.6rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(170, 120, 80, 0.08);
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(170, 120, 80, 0.12);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #5e3f28;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p {
+            font-size: 0.96rem;
+            color: #4d3b2c;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.4rem;
+        }
+
+        .card li {
+            padding: 0.4rem 0 0.4rem 1.4rem;
+            position: relative;
+            font-size: 0.96rem;
+            color: #4d3b2c;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #b48b6a;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .directory-area {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem 2rem 2rem;
+            margin: 2rem 0 2.2rem;
+            box-shadow: 0 4px 12px rgba(170, 120, 80, 0.08);
+        }
+
+        .directory-area h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #5e3f28;
+            border-bottom: 1px solid #edd7c4;
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .dir-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem 1rem;
+        }
+
+        .dir-links a {
+            display: inline-block;
+            background: #f6ede4;
+            color: #4d3827;
+            padding: 0.45rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 1px solid #e1cebb;
+            transition: background 0.15s, border-color 0.15s, box-shadow 0.1s;
+            box-shadow: 0 2px 4px rgba(150, 100, 70, 0.04);
+        }
+
+        .dir-links a:hover {
+            background: #e7d6c4;
+            border-color: #c7a98a;
+            box-shadow: 0 3px 8px rgba(150, 100, 70, 0.08);
+        }
+
+        .dir-links a:active {
+            transform: scale(0.97);
+        }
+
+        .notice-box {
+            background: #faf3e9;
+            border-radius: 24px;
+            padding: 1.4rem 2rem;
+            margin: 2rem 0 1.5rem;
+            border: 1px solid #e6d3c0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.6rem 1.2rem;
+        }
+
+        .notice-icon {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #9f7c5e;
+        }
+
+        .notice-text {
+            font-size: 0.95rem;
+            color: #4f3c2b;
+            flex: 1;
+        }
+
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 2rem;
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem 2rem 2rem;
+            margin: 1.8rem 0 2rem;
+            box-shadow: 0 4px 12px rgba(170, 120, 80, 0.06);
+        }
+
+        .faq-item {
+            border-bottom: 1px dashed #eedbcb;
+            padding-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #5f4330;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-a {
+            font-size: 0.88rem;
+            color: #6f5944;
+            line-height: 1.5;
+        }
+
+        .related-info {
+            background: white;
+            border-radius: 28px;
+            padding: 1.6rem 2rem 1.9rem;
+            margin: 1.5rem 0 1rem;
+            box-shadow: 0 4px 10px rgba(170, 120, 80, 0.06);
+        }
+
+        .related-info h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #5e3f28;
+            margin-bottom: 0.6rem;
+        }
+
+        .related-info p {
+            font-size: 0.95rem;
+            color: #4d3b2c;
+        }
+
+        .inline-link {
+            color: #8f6b4c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #c6a88c;
+            transition: border-color 0.1s, color 0.1s;
+        }
+
+        .inline-link:hover {
+            color: #5f3f28;
+            border-bottom: 1px solid #8f6b4c;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7d6650;
+            border-top: 1px solid #dfcfbe;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 2rem 1.2rem 2.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .faq-mini {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .dir-links {
+                gap: 0.5rem 0.8rem;
+            }
+
+            .notice-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.2rem;
+            }
+        }
+
+        @media (max-width: 460px) {
+            body {
+                padding: 1rem 0.8rem 2.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 0.8rem 2rem;
+                border-radius: 28px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                padding-left: 0.8rem;
+            }
+
+            .subhead {
+                padding-left: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .card, .directory-area, .faq-mini, .related-info {
+                padding: 1.2rem 1.2rem 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>leisu 资料索引</h1>
+    <div class="subhead">整理 · 归类 · 信息节点</div>
+
+    <!-- 双卡片：说明区 + 切入角度 -->
+    <div class="intro-grid">
+        <div class="card">
+            <h2>📋 说明</h2>
+            <p>本页围绕 <strong>leisu</strong> 构建轻量知识库目录，汇集条目分类、常见疑问与相关参考。内容以整理和索引为主，不替代原始来源。通过结构化的卡片和链接，便于快速定位感兴趣的部分。</p>
+        </div>
+        <div class="card">
+            <h2>🗂️ 信息索引</h2>
+            <ul>
+                <li>分类浏览：条目按照领域与用途分组</li>
+                <li>聚合节点：将分散的资料归纳为可检索单元</li>
+                <li>渐进展开：从概括到细节，适合不同查阅深度</li>
+                <li>持续修订：索引随内容补充而更新</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 目录感布局：按钮式链接区 -->
+    <div class="directory-area">
+        <h2>📂 目录 · 分类入口</h2>
+        <div class="dir-links">
+            <a href="#">概述</a>
+            <a href="#">背景与语境</a>
+            <a href="#">条目详解</a>
+            <a href="#">相关材料</a>
+            <a href="#">参考资源</a>
+            <a href="#">常见问题</a>
+            <a href="#">更新记录</a>
+        </div>
+        <p style="margin-top: 1.2rem; font-size: 0.93rem; color: #6f5944;">每个分类聚合一组信息，可从任意节点切入。核心信息源可参考 <a href="https://asia-m-leisu.com" class="inline-link">leisu</a> 上的原始说明与文档。</p>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="notice-box">
+        <span class="notice-icon">💡 提示</span>
+        <span class="notice-text">索引类页面以整理和引导为主，建议结合具体条目内容交叉查阅。链接指向外部站点时请注意核实来源与时效。</span>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <div class="faq-q">leisu 索引主要覆盖哪些方面？</div>
+            <div class="faq-a">涵盖基础概念、分类框架、常见关联条目及外部参考链接。目录结构会随内容深度调整。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">如何查找某一具体条目？</div>
+            <div class="faq-a">可使用分类入口浏览，或通过页面内关键词定位。如需更完整列表可参考 <a href="https://asia-m-leisu.com" class="inline-link">leisu</a> 站点导航。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">资料更新频率如何？</div>
+            <div class="faq-a">索引随信息积累不定期修订。重要更新会在更新记录分类中注明。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否包含用户贡献内容？</div>
+            <div class="faq-a">当前以整理公开材料为主，不直接收录未经验证的用户提交内容。</div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="related-info">
+        <h3>🔗 相关信息</h3>
+        <p>本索引页面与 <a href="https://asia-m-leisu.com" class="inline-link">leisu</a> 的主信息站保持独立，但引用其作为重要参考来源。建议将索引与主站配合使用：索引帮助定位，主站提供完整叙述。此外，部分分类条目也参考了公开文档与社区整理的二次资料，均已在对应条目中标注归属。</p>
+        <p style="margin-top: 0.8rem;">如果你是初次接触，可以从「概述」分类开始，再按需深入。索引本身不存储原始文件，仅提供结构化入口。</p>
+    </div>
+
+    <div class="footer-note">
+        知识库索引样式 · 内容持续整理中
+    </div>
+</div>
+</body>
+</html>
